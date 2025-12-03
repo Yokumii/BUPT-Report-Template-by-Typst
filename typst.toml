@@ -1,13 +1,13 @@
 [package]
-name = "modern-sjtu-thesis"
-version = "0.5.1"
+name = "bupt-report-template"
+version = "0.1.0"
 entrypoint = "lib.typ"
-authors = ["tzhtaylor"]
+authors = ["Yokumi"]
 license = "MIT"
-description = "上海交通大学学位论文 Typst 模板。Shanghai Jiao Tong University Thesis Typst Template."
-repository = "https://github.com/tzhtaylor/modern-sjtu-thesis"
-keywords = ["Shanghai Jiao Tong University", "thesis"]
-categories = ["thesis"]
+description = "北京邮电大学课程作业报告 Typst 模板。Beijing University of Posts and Telecommunications Course Report Typst Template."
+repository = "https://github.com/Yokumii/BUPT-Report-Template-by-Typst"
+keywords = ["Beijing University of Posts and Telecommunications", "BUPT", "report", "course"]
+categories = ["report"]
 exclude = []
 
 [template]

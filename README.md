@@ -1,39 +1,29 @@
-# 上海交通大学学位论文 modern-sjtu-thesis
+# 北京邮电大学课程作业报告 BUPT-Report-Template-by-Typst
 
-这是上海交通大学学位论文的 [Typst 模板](https://typst.app/universe/package/modern-sjtu-thesis)
-，它能够简洁、快速、持续生成 PDF 格式的毕业论文，现已支持本科、硕士和博士的毕业论文撰写，均参考官方提供的word模板进行开发。
+这是北京邮电大学课程作业报告的 [Typst 模板](https://typst.app/universe/package/bupt-report-template)，基于 [modern-sjtu-thesis](https://github.com/tzhtaylor/modern-sjtu-thesis) 修改而来。它能够简洁、快速、持续生成 PDF 格式的课程报告，支持报告类型（`doctype: "report"`）的撰写。
 
 ## 使用
 
 ### VS Code 本地编辑（推荐）
 
-#### 使用 Typst Universe 模板库版本
+1. 在 VS Code 中安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 插件，负责语法高亮、错误检查和 PDF 预览。
 
-1. 在 VS Code 中安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 插件，负责语法高亮, 错误检查和 PDF 预览。
+2. 克隆本仓库到本地：
+   ```bash
+   git clone https://github.com/yokumi/BUPT-Report-Template-by-Typst.git
+   ```
 
-2. 按下 `Ctrl + Shift + P`(Windows) / `Command + Shift + P`(MacOS) 打开命令界面，输入 `Typst: Show available Typst templates (gallery) for picking up a template` 打开 Tinymist 提供的 Template Gallery，然后从里面找到 `modern-sjtu-thesis`，点击 `❤` 按钮进行收藏，以及点击 `+` 号，就可以创建对应的论文模板了。
-
-3. 最后用 VS Code 打开生成的目录，打开 `thesis.typ` 文件，按下 `Ctrl + K V`(Windows) / `Command + K V`(MacOS) 或者是点击右上角的按钮进行实时编辑和预览。
-
-> 优点：使用最简单，目录结构清晰；缺点：官方模板库无法及时维护，出现 Bug 或者想要自定义样式，无法自行修改。
-
-#### 使用 GitHub 仓库版本
-
-1. 在 VS Code 中安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 插件，负责语法高亮, 错误检查和 PDF 预览。
-
-2. 运行命令 `git clone https://github.com/tzhTaylor/modern-sjtu-thesis`，克隆本仓库到本地。
-
-3. 最后用 VS Code 打开目录，打开 `template/thesis.typ` 文件，按下 `Ctrl + K V`(Windows) / `Command + K V`(MacOS) 或者是点击右上角的按钮进行实时编辑和预览。
-
-> 优点：模板更新最及时，在了解 Typst 语法的情况下可以自行对模板进行修改；对 git 操作不太熟悉的用户门槛较高。
+3. 用 VS Code 打开目录，打开 `template/thesis.typ` 文件，按下 `Ctrl + K V`(Windows) / `Command + K V`(MacOS) 或者是点击右上角的按钮进行实时编辑和预览。
 
 ### Web APP
 
 Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 
-实际上，我们只需要在 [Web App](https://typst.app/?template=modern-sjtu-thesis&version=0.5.1) 中的 `Start from template` 里选择 `modern-sjtu-thesis`，即可在线创建模板并使用。
+1. 访问 [Typst Web App](https://typst.app/)
+2. 创建新项目，上传本模板的所有文件
+3. 打开 `template/thesis.typ` 开始编辑
 
-你需要手动下载 [fonts.zip](https://github.com/tzhtaylor/modern-sjtu-thesis/releases/download/v0.5.1/fonts.zip) 然后手动上传 fonts 文件夹到项目中，否则会**导致字体显示错误**！
+> **注意**：如果使用 Web App，你需要手动上传 `fonts` 文件夹到项目中，否则会**导致字体显示错误**！
 
 ## Typst 快速入门
 
@@ -41,29 +31,20 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 
 ## 功能列表
 
-- **全局配置**
-  - 类似 LaTeX 中的 `documentclass` 的全局信息配置
-  - 盲审模式：将个人信息替换成小黑条，并且隐藏致谢页面，论文提交阶段使用
-  - 双面模式：加入空白页，便于打印和增加论文页数
-  - 打印模式：调整页边距，便于打印
-- **模板**
-  - 模板
-    - 中文封面
-    - 英文封面
-    - 声明页
-    - 中文摘要
-    - 英文摘要
-    - 目录页
-    - 插图目录
-    - 表格目录
-    - 算法目录
-    - 符号对照表
-    - 附录
-    - 参考文献
-    - 致谢
-    - 成果
-    - 英文大摘要（本科）
-- **环境**
+- **报告类型配置**
+  - 支持 `doctype: "report"` 报告类型
+  - 自动生成 BUPT 风格的封面（包含课程名称、实验名称、学生信息等）
+  - 自动生成目录页
+  - 支持参考文献
+
+- **报告结构**
+  - 中文封面（包含校名、课程名、实验名、学生信息）
+  - 目录页
+  - 正文内容
+  - 参考文献
+  - 附录（可选）
+
+- **环境支持**
   - 插图环境 `imagex`
     - 子图 `subimagex`
     - 双语图题
@@ -72,37 +53,51 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
     - 脚注
   - 算法环境 `algox`：跨页自动续
   - 定理环境：使用 `theorion` 包
+
 - **其他功能**
   - 正文字数统计
-  - 避免孤行标题 (experimental)
   - 自定义参考文献格式
   - 多行公式编号
 
-## 相关链接
+## 配置说明
 
-如果对 Typst 论文撰写感兴趣的话，可以从开题报告和中期报告模板开始尝试。
+在 `template/thesis.typ` 文件中，你可以配置以下信息：
 
-- [研究生开题报告 Typst 模板](https://github.com/tzhTaylor/typst-sjtu-thesis-proposal)
-
-- [硕士研究生中期报告 Typst 模板](https://github.com/tzhTaylor/typst-sjtu-thesis-midterm)
-
-如果想要类似于 SJTUBeamer 的幻灯片模板，可以使用我开发的
-
-- [基于 Touying 的上海交通大学 Typst 幻灯片模板](https://github.com/tzhtaylor/touying-sjtu)
-
-如果想要在平时的数学作业中使用 Typst，但对于 Typst 相关的数学语法不太熟悉，可以参考我维护的
-
-- [《本科生 LaTeX 数学》的 Typst 中文版](https://github.com/tzhtaylor/typst-undergradmath-zh)
+```typst
+) = documentclass(
+  doctype: "report", // 文档类型，报告模式使用 "report"
+  date: datetime.today(),
+  twoside: false,
+  print: false,
+  anonymous: false,
+  info: (
+    course_name: "课程名称",
+    experiment_name: "实验名称",
+    student_id: "520XXXXXXXX",
+    name: "张三",
+    name_en: "Zhang San",
+    class: "某某班级",
+    degree: "课程报告",
+    supervisor: "李四教授",
+    supervisor_en: "Prof. Li Si",
+    title: "课程名称",
+    title_en: "DISSERTATION TEMPLATE FOR MASTER DEGREE OF ENGINEERING IN SHANGHAI JIAO TONG UNIVERSITY",
+    school: "某某学院",
+    school_en: "School of XXXXXXX",
+    major: "某某专业",
+  ),
+)
+```
 
 ## Q&A
 
-### 我不会 LaTeX，可以用这个模板写论文吗？
+### 我不会 LaTeX，可以用这个模板写报告吗？
 
 可以。
 
 如果你不关注模板的具体实现原理，你可以用 Markdown Like 的语法进行编写，只需要按照模板的结构编写即可。
 
-### 我不会编程，可以用这个模板写论文吗？
+### 我不会编程，可以用这个模板写报告吗？
 
 同样可以。
 
@@ -122,7 +117,7 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 
 ### 为什么 Typst 有很多关于字体的警告？
 
-你会发现 Typst 有许多关于字体的警告，这是因为 modern-sjtu-thesis 为了保证在各个系统的可用性，加入了各个系统的字体集，你可以无视警告，或者克隆本仓库后在 `utils/style.typ` 中删除系统中不存在的字体。
+你会发现 Typst 有许多关于字体的警告，这是因为模板为了保证在各个系统的可用性，加入了各个系统的字体集，你可以无视警告，或者克隆本仓库后在 `utils/style.typ` 中删除系统中不存在的字体。
 
 ### 学习 Typst 需要多久？
 
@@ -156,8 +151,7 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 
 ## 致谢
 
-- 感谢 [@OrangeX4](https://github.com/OrangeX4) 开发的 [modern-nju-thesis](https://github.com/nju-lug/modern-nju-thesis) 模板，本模板大体结构都是参考其开发的。
-
+- 感谢 [@tzhtaylor](https://github.com/tzhtaylor) 开发的 [modern-sjtu-thesis](https://github.com/tzhtaylor/modern-sjtu-thesis) 模板，本模板基于其修改而来。
 - 感谢 [Typst 中文社区导航 FAQ](https://typst-doc-cn.github.io/guide/FAQ.html)，帮忙解决了各种疑难杂症。
 
 ## License
