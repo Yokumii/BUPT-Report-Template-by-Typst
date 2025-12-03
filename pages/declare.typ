@@ -14,7 +14,7 @@
   supervisor-sign: none,
   info: (:),
 ) = {
-  if anonymous {
+  if anonymous or doctype == "report" {
     return
   }
 

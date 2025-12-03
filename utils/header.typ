@@ -60,6 +60,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -73,6 +75,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -82,6 +86,8 @@
         "上海交通大学博士学位论文"
       } else if doctype == "master" {
         "上海交通大学硕士学位论文"
+      } else if doctype == "report" {
+        "北京邮电大学课程作业报告"
       } else {
         "上海交通大学学位论文"
       }
@@ -149,6 +155,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -166,6 +174,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -175,6 +185,8 @@
         "上海交通大学博士学位论文"
       } else if doctype == "master" {
         "上海交通大学硕士学位论文"
+      } else if doctype == "report" {
+        "北京邮电大学课程作业报告"
       } else {
         "上海交通大学学位论文"
       }
@@ -245,6 +257,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -262,6 +276,8 @@
           "上海交通大学博士学位论文"
         } else if doctype == "master" {
           "上海交通大学硕士学位论文"
+        } else if doctype == "report" {
+          "北京邮电大学课程作业报告"
         } else {
           "上海交通大学学位论文"
         }
@@ -271,6 +287,8 @@
         "上海交通大学博士学位论文"
       } else if doctype == "master" {
         "上海交通大学硕士学位论文"
+      } else if doctype == "report" {
+        "北京邮电大学课程作业报告"
       } else {
         "上海交通大学学位论文"
       }

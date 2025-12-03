@@ -14,6 +14,12 @@
   } else if doctype == "master" {
     "A Dissertation Submitted to
     Shanghai Jiao Tong University for the Degree of Master"
+  } else if doctype == "bachelor" {
+    "A Dissertation Submitted to
+    Shanghai Jiao Tong University for the Degree of Bachelor"
+  } else if doctype == "report" {
+    "Report Submitted to
+    Beijing University of Posts and Telecommunications"
   } else {
     "A Dissertation Submitted to
     Shanghai Jiao Tong University for the Degree of Bachelor"
