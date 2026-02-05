@@ -78,9 +78,19 @@
   show heading.where(level: 1): set align(center)
   set heading(
     numbering: if doctype == "bachelor" {
-      "1.1"
+      numbly(
+        "附录{1}",
+        "{1}.{2}",
+        "{1}.{2}.{3}",
+        "{1}.{2}.{3}.{4}",
+      )
     } else {
-      "A.1"
+      numbly(
+        "附录{1:A}",
+        "{1:A}.{2}",
+        "{1:A}.{2}.{3}",
+        "{1:A}.{2}.{3}.{4}",
+      )
     },
     supplement: [附录],
   )
@@ -107,9 +117,9 @@
 
     v(if doctype == "bachelor" { 30pt } else { 24pt })
     if doctype == "bachelor" {
-      it.body + "（" + it.supplement + counter(heading).display() + "）"
+      it.body + "（" + counter(heading).display() + "）"
     } else {
-      it.supplement + counter(heading).display() + if doctype == "bachelor" { h(0.5em) } else { h(1em) } + it.body
+      counter(heading).display() + h(1em) + it.body
     }
     v(18pt)
   }

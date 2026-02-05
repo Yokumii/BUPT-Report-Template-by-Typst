@@ -45,7 +45,7 @@
   inset: 0% + 5pt,
   row-gutter: auto,
   rows: auto,
-  stroke: 1pt + black,
+  stroke: none,
   caption: auto,
   caption-en: none,
   breakable: true,
@@ -54,7 +54,6 @@
   set figure.caption(position: top)
   show table: set text(size: zihao.wuhao, weight: "regular")
   show table: set par(leading: 1em)
-  set table(stroke: none)
   let prefix = "tablex-none-label"
   let number = query(figure.where(kind: "table").before(here()))
   let label-name = if label-name == "" { str("~" + prefix + "-" + str(number.len())) } else { label-name }
@@ -70,6 +69,7 @@
             columns: columns,
             align: alignment,
             inset: inset,
+            stroke: stroke,
             table.header(
               table.cell(
                 colspan: if type(columns) == int { columns } else { columns.len() },
@@ -232,7 +232,7 @@
     #figure(
       [
         #figure(
-          table(..body, columns: columns, row-gutter: 1em, column-gutter: 1em),
+          table(..body, columns: columns, row-gutter: 1em, column-gutter: 1em, stroke: none),
           caption: caption,
           kind: "image",
           supplement: [图],

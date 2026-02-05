@@ -29,7 +29,6 @@
             #h(-0.5em)
             （
             #h(-0.2em)
-            #it.element.supplement
             #it.prefix()
             #h(-0.3em)
             ）
@@ -39,7 +38,7 @@
           ],
         )
       } else {
-        it.indented(it.element.supplement + it.prefix(), it.inner())
+        it.indented(it.prefix(), it.inner())
       }
     } else {
       it.indented(it.prefix(), it.inner())
