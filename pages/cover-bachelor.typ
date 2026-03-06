@@ -104,7 +104,7 @@
 
     ..for (key, value) in key-to-zh {
       if key-to-zh.keys().contains(key) {
-        (info-key(value), text(weight: "bold")[：], info-value(info.at(key)))
+        (text(weight: "bold", info-key(value)), text(weight: "bold")[：], info-value(info.at(key)))
       }
     },
   )

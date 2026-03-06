@@ -32,9 +32,7 @@
 
 Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 
-实际上，我们只需要在 [Web App](https://typst.app/?template=modern-sjtu-thesis&version=0.5.2) 中的 `Start from template` 里选择 `modern-sjtu-thesis`，即可在线创建模板并使用。
-
-你需要手动下载 [fonts.zip](https://github.com/sjtug/modern-sjtu-thesis/releases/download/v0.5.2/fonts.zip) 然后手动上传 fonts 文件夹到项目中，否则会**导致字体显示错误**！
+实际上，我们只需要在 [Web App](https://typst.app/?template=modern-sjtu-thesis&version=0.6.0) 中的 `Start from template` 里选择 `modern-sjtu-thesis`，即可在线创建模板并使用。
 
 ## Typst 快速入门
 
@@ -79,6 +77,47 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
   - 自定义参考文献格式
   - 多行公式编号
 
+## 字体设置
+
+你会发现 Typst 有许多关于字体的警告，这是因为 modern-sjtu-thesis 为了保证在各个系统的可用性，加入了各个系统的字体集。在 0.6.0 版本之后，你可以通过设置 `font-set` 参数为对应的系统字体集，即可消除警告。
+
+### 字体集配置表
+
+| font-set | `webapp` | `mac` | `windows` | `linux` | `webapp-upload` |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **en-serif** | TeX Gyre Termes | Times New Roman | Times New Roman | Liberation Serif | TeX Gyre Termes |
+| **en-sans** | TeX Gyre Heros | Arial | Arial | Liberation Sans | TeX Gyre Heros |
+| **songti** | Noto Serif CJK SC | Songti SC | SimSun | Noto Serif CJK SC | ST Songti |
+| **heiti** | Noto Sans CJK SC | Heiti SC | SimHei | Noto Sans CJK SC | SimHei |
+| **kaiti** | *(未定义)* | Kaiti SC | KaiTi | *(未定义)* | Kaiti |
+| **fangsong** | *(未定义)* | FangSong SC | FangSong | *(未定义)* | FangSong |
+| **dengkuan** | Fira Mono | Menlo | Consolas | Liberation Mono | Fira Mono |
+| **math** | New Computer Modern Math | STIX Two Math | Cambria Math | Latin Modern Math | New Computer Modern Math |
+
+如果对 Web APP 自带的字体配置不满意，可以下载 [fonts.zip](https://github.com/sjtug/modern-sjtu-thesis/releases/download/v0.6.0/fonts.zip) 然后手动上传 fonts 文件夹到项目中，并将 `font-set` 设置为 `webapp-upload`，以获得与本地相同的字体效果。
+
+### 字体自定义设置
+
+除了使用 `font-set` 参数指定的字体集外，你也可以通过在 `documentclass` 中添加 `fonts` 参数来自定义字体。在自定义字体集时，需要删去 `font-set` 参数。
+
+```typ
+documentclass(
+  doctype: "master",
+  ...,
+  fonts: (
+    en-serif: "Times New Roman",
+    en-sans: "Arial",
+    songti: ((name: "Times New Roman", covers: "latin-in-cjk"), "Songti SC"),
+    heiti: ((name: "Times New Roman", covers: "latin-in-cjk"), "Heiti SC"),
+    kaiti: ((name: "Times New Roman", covers: "latin-in-cjk"), "Kaiti SC"),
+    fangsong: ((name: "Times New Roman", covers: "latin-in-cjk"), "FangSong SC"),
+    dengkuan: ("Menlo", (name: "Heiti SC", covers: regex("\p{script=Han}"))),
+    math: ("STIX Two Math", (name: "Songti SC", covers: regex("\p{script=Han}"))),
+  ),
+  info: (...),
+)
+```
+
 ## 相关链接
 
 如果对 Typst 论文撰写感兴趣的话，可以从开题报告和中期报告模板开始尝试。
@@ -120,10 +159,6 @@ Typst 提供了官方的 Web App，支持像 Overleaf 一样在线编辑。
 光标点击处双向跳转功能，使得你可以直接拖动预览窗口到你想要的位置，然后用鼠标点击即可到达对应源码所在位置。
 
 还有一个好处是，单个源文件便于同步和分享。
-
-### 为什么 Typst 有很多关于字体的警告？
-
-你会发现 Typst 有许多关于字体的警告，这是因为 modern-sjtu-thesis 为了保证在各个系统的可用性，加入了各个系统的字体集，你可以无视警告，或者克隆本仓库后在 `utils/style.typ` 中删除系统中不存在的字体。
 
 ### 学习 Typst 需要多久？
 
@@ -170,4 +205,4 @@ including the Apache License 2.0 and MIT License.
 
 The school emblem image (`assets/sjtu-logo.pdf`) is copyrighted by Shanghai Jiao Tong University and may be used solely for academic purposes by current students and faculty.
 
-See the `third_party/` directory for details on third-party components and their licenses.
+See the `third-party/` directory for details on third-party components and their licenses.

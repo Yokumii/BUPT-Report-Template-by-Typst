@@ -17,7 +17,7 @@
 #import "pages/acknowledgement.typ": acknowledgement-page
 #import "pages/achievement.typ": achievement-page
 #import "pages/summary-en.typ": summary-en-page
-#import "@preview/lovelace:0.3.0": *
+#import "@preview/lovelace:0.3.1": *
 
 #let documentclass(
   doctype: "master",
@@ -97,7 +97,6 @@
         en-sans: "Liberation Sans",
         songti: ((name: "Liberation Serif", covers: "latin-in-cjk"), "Noto Serif CJK SC"),
         heiti: ((name: "Liberation Serif", covers: "latin-in-cjk"), "Noto Sans CJK SC"),
-        kaiti: ((name: "Liberation Serif", covers: "latin-in-cjk"), "TW-MOE-Std-Kai"),
         dengkuan: ("Liberation Mono", (name: "Noto Sans CJK SC", covers: regex("\p{script=Han}"))),
         math: ("Latin Modern Math", (name: "Noto Serif CJK SC", covers: regex("\p{script=Han}"))),
       )
