@@ -15,7 +15,7 @@
   info: (:),
   ziti: (:),
 ) = {
-  if anonymous {
+  if anonymous or doctype == "report" {
     return
   }
 
