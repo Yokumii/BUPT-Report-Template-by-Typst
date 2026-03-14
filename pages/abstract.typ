@@ -14,10 +14,11 @@
 
   body
 
-  linebreak()
-  linebreak()
-
-  [*关键词：*#(("",) + keywords.intersperse("，")).sum()]
+  if keywords.len() > 0 {
+    linebreak()
+    linebreak()
+    [*关键词：*#(("",) + keywords.intersperse("，")).sum()]
+  }
 
   pagebreak(
     weak: true,
@@ -26,4 +27,3 @@
     },
   )
 }
-

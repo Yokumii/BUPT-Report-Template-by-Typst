@@ -1,37 +1,21 @@
 #import "../lib.typ": *
 
 #let (
-  doctype,
-  date,
-  twoside,
-  anonymous,
-  info,
-  ziti,
   doc,
   preface,
   mainmatter,
   appendix,
   cover,
-  cover-en,
-  declare,
   abstract,
-  abstract-en,
   outline,
-  image-outline,
-  table-outline,
-  algorithm-outline,
-  nomenclature,
   bib,
-  acknowledgement,
-  achievement,
-  summary-en,
 ) = documentclass(
-  doctype: "report", // 文档类型: "master" | "doctor" | "bachelor"
+  doctype: "report", // 文档类型固定为 report
   date: datetime.today(), // 日期
   twoside: false, // 双面模式
   print: false, // 打印模式, 设置为 true 时，根据奇偶页调整页边距
   anonymous: false, // 盲审模式
-  // font-set: "mac", // 字体集设置: "mac" | "windows" | "linux" | "webapp" | "webapp-upload", 根据系统设定字体集，可消除未知字体警告,
+  font-set: "mac", // 字体集设置: "mac" | "windows" | "linux" | "webapp" | "webapp-upload", 根据系统设定字体集，可消除未知字体警告,
   info: (
     course_name: "课程名称",
     experiment_name: "实验名称",
@@ -42,7 +26,6 @@
     degree: "课程报告",
     supervisor: "李四教授",
     supervisor-en: "Prof. Li Si",
-    // co-supervisor: "王五研究员", // 行业导师，添加该字段将会转换为工程硕士专用封面
     title: "课程名称",
     title-en: "DISSERTATION TEMPLATE FOR MASTER DEGREE OF ENGINEERING IN SHANGHAI JIAO TONG UNIVERSITY",
     school: "某某学院",
@@ -55,61 +38,20 @@
 
 #cover()
 
-#if doctype != "report" [
-  #cover-en()
-]
-
-#declare(
-  confidentialty-level: "internal", // 保密级别: "public" | "internal" | "secret" | "confidential"
-  confidentialty-year: 2, // 保密年份数，请根据保密级别的要求填写
-  date: datetime.today(),
-  original-statement-sign: place(dx: 13cm, dy: -1.3cm, image("figures/student-sign.png", height: 2em)), // 请根据签名图片的大小，自行调整图片的高度和位置
-  authorization-author-sign: place(dx: 5cm, dy: -1.3cm, image("figures/student-sign.png", height: 2em)),
-  supervisor-sign: place(dx: 4cm, dy: -1.2cm, image("figures/supervisor-sign.png", height: 2em)),
-) // 不需要显示日期和签名，可直接注释
-
 #show: preface
 
-#if doctype != "report" [
-  #abstract(keywords: (
-    "学位论文",
-    "论文格式",
-    "规范化",
-    "模板",
-  ))[
-    学位论文是研究生从事科研工作的成果的主要表现，集中表明了作者在研究工作中获得的新的发明、理论或见解，是研究生申请硕士或博士学位的重要依据，也是科研领域中的重要文献资料和社会的宝贵财富。
-  
-    为了提高研究生学位论文的质量，做到学位论文在内容和格式上的规范化与统一化，特制作本模板。
-  ]
+#let enable-abstract = false // 设为 true 即可启用中文摘要页（报告可选）
 
-  #abstract-en(keywords: ("dissertation", "dissertation format", "standardization", "template"))[
-    As a primary means of demonstrating research findings for postgraduate students, dissertation is a systematic and standardized record of the new inventions, theories or insights obtained by the author in the research work. It can not only function as an important reference when students pursue further studies, but also contribute to scientific research and social development.
-  
-    This template is therefore made to improve the quality of postgraduates' dissertations and to further standardize it both in content and in format.
+#if enable-abstract [
+  #abstract(keywords: (
+    "关键词1",
+    "关键词2",
+  ))[
+    这里填写报告的中文摘要内容。
   ]
 ]
 
 #outline()
-
-#if doctype != "report" [
-  #image-outline() // 插图目录
-
-  #table-outline() // 表格目录
-
-  #algorithm-outline() // 算法目录
-
-  #nomenclature(
-    width: 50%,
-    columns: (1fr, 1.5fr),
-  )[
-    / $epsilon$: 介电常数
-    / $mu$: 磁导率
-    / $epsilon$: 介电常数
-    / $mu$: 磁导率
-    / $epsilon$: 介电常数
-    / $mu$: 磁导率
-  ] // nomenclature 为单独一页的符号对照表，在附录中可使用 nomenclature-table
-]
 
 #show: mainmatter
 // #show: mainmatter.with(enable-avoid-orphan-headings: true) // 避免孤行标题，此为实验性功能，会对页面顶部距离造成影响
@@ -671,37 +613,4 @@ $
   label-name: "lilaq-scatter-example",
 )
 
-// 请根据文档类型，自行选择 if-else 中的内容
-
-#if doctype != "report" [
-  #if doctype == "bachelor" [
-    #achievement(
-      papers: (
-        "Chen H, Chan C T. Acoustic cloaking in three dimensions using acoustic metamaterials[J]. Applied Physics Letters, 2007, 91:183518.",
-        "Chen H, Wu B I, Zhang B, et al. Electromagnetic Wave Interactions with a Metamaterial Cloak[J]. Physical Review Letters, 2007, 99(6):63903.",
-      ),
-      patents: ("第一发明人, 永动机[P], 专利申请号202510149890.0.",),
-    )
-
-    #acknowledgement[
-      致谢主要感谢导师和对论文工作有直接贡献和帮助的人士和单位。致谢言语应谦虚诚恳，实事求是。
-    ]
-
-    #summary-en[
-      HCCI (Homogenous Charge Compression Ignition)combustion has advantages in terms of efficiency and reduced emission. HCCI combustion can not only ensure both the high economic and dynamic quality of the engine, but also efficiently reduce the NOx and smoke emission. Moreover, one of the remarkable characteristics of HCCI combustion is that the ignition and combustion process are controlled by the chemical kinetics, so the HCCI ignition time can vary significantly with the changes of engine configuration parameters and operating conditions......
-    ]
-  ] else [
-    #acknowledgement[
-      致谢主要感谢导师和对论文工作有直接贡献和帮助的人士和单位。致谢言语应谦虚诚恳，实事求是。
-    ]
-
-    #achievement(
-      papers: (
-        "Chen H, Chan C T. Acoustic cloaking in three dimensions using acoustic metamaterials[J]. Applied Physics Letters, 2007, 91:183518.",
-        "Chen H, Wu B I, Zhang B, et al. Electromagnetic Wave Interactions with a Metamaterial Cloak[J]. Physical Review Letters, 2007, 99(6):63903.",
-      ),
-      patents: ("第一发明人, 永动机[P], 专利申请号202510149890.0.",),
-    )
-  ]
-]
 

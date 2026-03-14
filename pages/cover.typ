@@ -4,221 +4,107 @@
 
 #let cover-page(
   date: datetime.today(),
-  doctype: "master",
   twoside: false,
   anonymous: false,
   info: (:),
-  key-to-zh: (:),
   ziti: (:),
 ) = {
-  // ======================
-  // 报告模式：BUPT 课程作业报告封面
-  // ======================
-  if doctype == "report" {
-    let course_name = info.at("course_name", default: info.title)
-    let experiment_name = info.at("experiment_name", default: info.title)
+  let course_name = info.at("course_name", default: info.title)
+  let experiment_name = info.at("experiment_name", default: info.title)
 
-    // 顶部校名图片
-    align(
-      center,
-      image(
-        "../assets/bupt-name.png",
-        width: 10cm,
-      ),
+  // 顶部校名图片
+  align(
+    center,
+    image(
+      "../assets/bupt-name.png",
+      width: 10cm,
+    ),
+  )
+
+  // 《课程名称》
+  align(
+    center,
+    text(font: ziti.songti, size: zihao.yihao, weight: "bold")[《#course_name》],
+  )
+
+
+  // “课程作业报告”
+  align(
+    center,
+    text(font: ziti.heiti, size: zihao.yihao, weight: "bold")[课程作业报告],
+  )
+
+  v(0.5cm)
+
+  // 中间校徽（圆形）——用现有 bupt-logo
+  align(
+    center,
+    image(
+      "../assets/bupt-logo.png",
+      width: 4cm,
+    ),
+  )
+
+  v(0.5cm)
+
+  // 实验名称行（优先使用 experiment_name）
+  align(
+    center,
+    text(font: ziti.heiti, size: zihao.sanhao, weight: "bold")[#experiment_name],
+  )
+
+  v(0.5cm)
+
+  // 下方信息表：姓名 / 学院 / 专业 / 班级 / 学号 / 指导教师
+  let info-key(zh) = distr(width: 5em, zh)
+  let info-value(zh) = (
+    text(
+      zh,
+      font: ziti.songti,
+      size: zihao.sihao,
     )
-
-    // 《课程名称》
-    align(
-      center,
-      text(font: ziti.songti, size: zihao.yihao, weight: "bold")[《#course_name》],
-    )
-
-
-    // “课程作业报告”
-    align(
-      center,
-      text(font: ziti.heiti, size: zihao.yihao, weight: "bold")[课程作业报告],
-    )
-
-    v(0.5cm)
-
-    // 中间校徽（圆形）——用现有 bupt-logo
-    align(
-      center,
-      image(
-        "../assets/bupt-logo.png",
-        width: 4cm,
-      ),
-    )
-
-    v(0.5cm)
-
-    // 实验名称行（优先使用 experiment_name）
-    align(
-      center,
-      text(font: ziti.heiti, size: zihao.sanhao, weight: "bold")[#experiment_name],
-    )
-
-    v(0.5cm)
-
-    // 下方信息表：姓名 / 学院 / 专业 / 班级 / 学号 / 指导教师
-    let info-key(zh) = distr(width: 5em, zh)
-    let info-value(zh) = (
-      text(
-        zh,
-        font: ziti.songti,
-        size: zihao.sihao,
-      )
-    )
-
-    set text(font: ziti.heiti, size: zihao.sihao)
-    table(
-      stroke: none,
-      align: (x, y) => (if x >= 1 { left } else { right }),
-      columns: (46%, 1%, 53%),
-      inset: (right: 0em),
-      column-gutter: (-0.3em, 1em),
-      row-gutter: 0.7em,
-
-      [#info-key("姓名")],
-      [#text(weight: "bold")[：]],
-      [#if anonymous {} else { info-value(info.name) }],
-
-      [#info-key("学院")],
-      [#text(weight: "bold")[：]],
-      [#info-value(info.school)],
-
-      [#info-key("专业")],
-      [#text(weight: "bold")[：]],
-      [#info-value(info.major)],
-
-      [#info-key("班级")],
-      [#text(weight: "bold")[：]],
-      [#info-value(info.class)],
-
-      [#info-key("学号")],
-      [#text(weight: "bold")[：]],
-      [#if anonymous {} else { info-value(info.at("student-id", default: info.at("student_id", default: ""))) }],
-
-      [#info-key("指导教师")],
-      [#text(weight: "bold")[：]],
-      [#if anonymous {} else { info-value(info.supervisor) }],
-    )
-
-    v(0.5cm)
-
-    align(
-      center,
-      text(font: ziti.songti, size: zihao.sihao, weight: "bold")[#datetime-display(date)],
-    )
-
-  } else {
-    // ======================
-    // 非 report：保留原 SJTU 封面
-    // ======================
-    align(
-      center,
-      image(
-        "../assets/sjtu-logo.pdf",
-        width: 3cm,
-      ),
-    )
-
-  let cover-title = if doctype == "doctor" {
-    "上海交通大学博士学位论文"
-  } else {
-    "上海交通大学硕士学位论文"
-  }
-
-  let customized = key-to-zh != (:)
-
-  let key-to-zh = if customized {
-    key-to-zh
-  } else {
-    (
-      name: "姓名",
-      student-id: "学号",
-      supervisor: "导师",
-      co-supervisor: "联合导师",
-      school: "院系",
-      major: [学科/#h(0.1em)专业],
-      degree: "申请学位",
-    )
-  }
-
-  if anonymous {
-    info.name = ""
-    info.student-id = ""
-    info.supervisor = ""
-    if info.keys().contains("co-supervisor") {
-      info.co-supervisor = ""
-    }
-  }
-
-  if not customized and doctype == "master" and info.keys().contains("co-supervisor") {
-    cover-title = "上海交通大学专业学位硕士学位论文"
-    key-to-zh.supervisor = "校内导师"
-    key-to-zh.school = "学院"
-  }
-
-  for key in key-to-zh.keys() {
-    if not info.keys().contains(key) {
-      let tmp = key-to-zh.remove(key)
-    }
-  }
-
-    align(
-      center,
-      text(font: ziti.songti, size: zihao.xiaoer)[#cover-title],
-    )
-
-  v(1fr)
-
-    align(
-      center,
-      text(font: ziti.songti, size: zihao.erhao, weight: "bold")[#info.title],
-    )
-
-  v(1.1fr)
-
-    let info-key(zh) = distr(width: 5em, zh)
-    let info-value(zh) = (
-      text(
-        zh,
-        font: ziti.songti,
-        size: zihao.sihao,
-      )
-    )
+  )
 
   set text(font: ziti.heiti, size: zihao.sihao)
   table(
     stroke: none,
-    align: (x, y) => (
-      if x >= 1 {
-        left
-      } else {
-        right
-      }
-    ),
+    align: (x, y) => (if x >= 1 { left } else { right }),
     columns: (46%, 1%, 53%),
     inset: (right: 0em),
     column-gutter: (-0.3em, 1em),
     row-gutter: 0.7em,
 
-    ..for (key, value) in key-to-zh {
-      if key-to-zh.keys().contains(key) {
-        (info-key(value), text(weight: "bold")[：], info-value(info.at(key)))
-      }
-    },
+    [#info-key("姓名")],
+    [#text(weight: "bold")[：]],
+    [#if anonymous {} else { info-value(info.name) }],
+
+    [#info-key("学院")],
+    [#text(weight: "bold")[：]],
+    [#info-value(info.school)],
+
+    [#info-key("专业")],
+    [#text(weight: "bold")[：]],
+    [#info-value(info.major)],
+
+    [#info-key("班级")],
+    [#text(weight: "bold")[：]],
+    [#info-value(info.class)],
+
+    [#info-key("学号")],
+    [#text(weight: "bold")[：]],
+    [#if anonymous {} else { info-value(info.at("student-id", default: info.at("student_id", default: ""))) }],
+
+    [#info-key("指导教师")],
+    [#text(weight: "bold")[：]],
+    [#if anonymous {} else { info-value(info.supervisor) }],
   )
 
-    linebreak()
+  v(0.5cm)
 
-    align(
-      center,
-      text(font: ziti.songti, size: zihao.sihao, weight: "bold")[#datetime-display(date)],
-    )
-  }
+  align(
+    center,
+    text(font: ziti.songti, size: zihao.sihao, weight: "bold")[#datetime-display(date)],
+  )
 
   v(0.2cm)
   pagebreak(weak: true, to: if twoside { "odd" })

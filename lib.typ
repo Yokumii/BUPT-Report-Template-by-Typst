@@ -6,21 +6,13 @@
 #import "layouts/mainmatter.typ": *
 #import "layouts/appendix.typ": appendix
 #import "pages/cover.typ": cover-page
-#import "pages/cover-bachelor.typ": cover-bachelor-page
-#import "pages/cover-en.typ": cover-en-page
-#import "pages/declare.typ": declare-page
 #import "pages/abstract.typ": abstract-page
-#import "pages/abstract-en.typ": abstract-en-page
-#import "pages/outline.typ": algorithm-outline-page, image-outline-page, outline-page, table-outline-page
-#import "pages/nomenclature.typ": nomenclature-page, nomenclature-table
+#import "pages/outline.typ": outline-page
 #import "pages/bib.typ": bibliography-page
-#import "pages/acknowledgement.typ": acknowledgement-page
-#import "pages/achievement.typ": achievement-page
-#import "pages/summary-en.typ": summary-en-page
 #import "@preview/lovelace:0.3.1": *
 
 #let documentclass(
-  doctype: "master",
+  doctype: "report",
   date: datetime.today(),
   twoside: false,
   anonymous: false,
@@ -28,8 +20,8 @@
   font-set: none,
   fonts: preset-ziti,
   info: (:),
-  key-to-zh: (:),
 ) = {
+  doctype = "report"
   date = date
   info = (
     (
@@ -47,7 +39,6 @@
     )
       + info
   )
-  key-to-zh = key-to-zh
   fonts = {
     if font-set == "webapp" {
       (
@@ -106,13 +97,12 @@
   }
 
   (
-    doctype: doctype,
+    doctype: "report",
     date: date,
     twoside: twoside,
     anonymous: anonymous,
     print: print,
     info: info,
-    key-to-zh: key-to-zh,
     ziti: fonts,
     doc: (..args) => {
       doc(
@@ -150,47 +140,12 @@
       )
     },
     cover: (..args) => {
-      if doctype == "bachelor" {
-        cover-bachelor-page(
-          ..args,
-          twoside: twoside,
-          anonymous: anonymous,
-          info: info + args.named().at("info", default: (:)),
-          date: date,
-          key-to-zh: key-to-zh,
-          ziti: fonts,
-        )
-      } else {
-        cover-page(
-          ..args,
-          doctype: doctype,
-          twoside: twoside,
-          anonymous: anonymous,
-          info: info + args.named().at("info", default: (:)),
-          date: date,
-          key-to-zh: key-to-zh,
-          ziti: fonts,
-        )
-      }
-    },
-    cover-en: (..args) => {
-      cover-en-page(
+      cover-page(
         ..args,
-        doctype: doctype,
         twoside: twoside,
         anonymous: anonymous,
         info: info + args.named().at("info", default: (:)),
         date: date,
-        ziti: fonts,
-      )
-    },
-    declare: (..args) => {
-      declare-page(
-        ..args,
-        doctype: doctype,
-        twoside: twoside,
-        anonymous: anonymous,
-        info: info + args.named().at("info", default: (:)),
         ziti: fonts,
       )
     },
@@ -202,76 +157,15 @@
         ziti: fonts,
       )
     },
-    abstract-en: (..args) => {
-      abstract-en-page(
-        ..args,
-        doctype: doctype,
-        twoside: twoside,
-        info: info + args.named().at("info", default: (:)),
-        ziti: fonts,
-      )
-    },
     outline: (..args) => {
       outline-page(
         ..args,
-        doctype: doctype,
         twoside: twoside,
-      )
-    },
-    image-outline: (..args) => {
-      image-outline-page(
-        ..args,
-        twoside: twoside,
-      )
-    },
-    table-outline: (..args) => {
-      table-outline-page(
-        ..args,
-        twoside: twoside,
-      )
-    },
-    algorithm-outline: (..args) => {
-      algorithm-outline-page(
-        ..args,
-        twoside: twoside,
-      )
-    },
-    nomenclature: (..args) => {
-      nomenclature-page(
-        ..args,
-        twoside: twoside,
-        ziti: fonts,
       )
     },
     bib: (..args) => {
       bibliography-page(
         ..args,
-        doctype: doctype,
-        twoside: twoside,
-        ziti: fonts,
-      )
-    },
-    acknowledgement: (..args) => {
-      acknowledgement-page(
-        ..args,
-        doctype: doctype,
-        twoside: twoside,
-        anonymous: anonymous,
-        ziti: fonts,
-      )
-    },
-    achievement: (..args) => {
-      achievement-page(
-        ..args,
-        doctype: doctype,
-        twoside: twoside,
-        ziti: fonts,
-      )
-    },
-    summary-en: (..args) => {
-      summary-en-page(
-        ..args,
-        title: info.title-en,
         doctype: doctype,
         twoside: twoside,
         ziti: fonts,
