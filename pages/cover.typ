@@ -1,8 +1,4 @@
-#import "../utils/style.typ": zihao, ziti
-#import "../utils/distr.typ": distr
-#import "../utils/datetime-display.typ": datetime-display
-
-#import "../utils/style.typ": zihao, ziti
+#import "../utils/style.typ": zihao
 #import "../utils/distr.typ": distr
 #import "../utils/datetime-display.typ": datetime-display
 
@@ -102,7 +98,7 @@
 
       [#info-key("学号")],
       [#text(weight: "bold")[：]],
-      [#if anonymous {} else { info-value(info.student_id) }],
+      [#if anonymous {} else { info-value(info.at("student-id", default: info.at("student_id", default: ""))) }],
 
       [#info-key("指导教师")],
       [#text(weight: "bold")[：]],
